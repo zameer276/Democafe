@@ -1,36 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-body: "Inter", sans-serif;
 
-  --color-coffee-dark: #2C1810;
-  --color-coffee-medium: #4B3621;
-  --color-coffee-light: #6F4E37;
-  --color-coffee-accent: #C0A080;
-  --color-cream: #FDFBF7;
-  --color-beige: #F5F5DC;
-  --color-soft-black: #1A1A1A;
+  --color-gold: #C5A059;
+  --color-paper: #F5F2ED;
+  --color-ink: #1A1A1A;
+  --color-charcoal: #121212;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
-    @apply bg-cream text-soft-black font-sans;
+    @apply bg-paper text-ink font-sans antialiased selection:bg-gold selection:text-paper;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-serif tracking-tight font-light;
   }
 }
 
-.glass-nav {
-  @apply bg-cream/80 backdrop-blur-md border-b border-coffee-dark/5;
+@layer components {
+  .section-padding {
+    @apply py-32 md:py-48 px-6 md:px-12 lg:px-24;
+  }
+  
+  .btn-luxury {
+    @apply px-10 py-5 border border-ink/20 text-ink rounded-full font-sans text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-ink hover:text-paper hover:border-ink;
+  }
+
+  .btn-gold {
+    @apply px-10 py-5 bg-gold text-paper rounded-full font-sans text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-ink hover:shadow-2xl;
+  }
+
+  .text-display {
+    @apply text-6xl md:text-8xl lg:text-9xl font-serif leading-[0.85] tracking-tighter;
+  }
+
+  .oval-mask {
+    border-radius: 9999px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
 }
 
-.coffee-gradient {
-  background: linear-gradient(135deg, var(--color-coffee-dark) 0%, var(--color-coffee-medium) 100%);
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
 }
-
-.hover-lift {
-  @apply transition-transform duration-300 hover:-translate-y-1;
+::-webkit-scrollbar-track {
+  @apply bg-paper;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gold/30 rounded-full hover:bg-gold/60 transition-colors;
 }
